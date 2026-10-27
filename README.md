@@ -36,18 +36,24 @@ Plataforma de inteligencia geoespacial, monitoreo meteorológico y videovigilanc
 
 ## 🐳 Despliegue Rápido con Docker
 
-1. Clona el repositorio:
+1. Clona el repositorio y entra a la carpeta del proyecto:
    ```bash
-   git clone <URL_DEL_REPOSITORIO>
-   cd ojo-de-dios
+   git clone https://github.com/jmvenerosod/ojo-de-dios-mexico.git
+   cd ojo-de-dios-mexico
    ```
 
-2. Crea tu archivo `.env.local` a partir de `.env.example`:
-   ```bash
-   cp .env.example .env.local
-   ```
+2. Crea tu archivo `.env.local` a partir de `.env.example` (necesario para `docker compose`):
+   - **En Windows (PowerShell):**
+     ```powershell
+     Copy-Item .env.example .env.local
+     ```
+   - **En Linux / macOS / Git Bash:**
+     ```bash
+     cp .env.example .env.local
+     ```
+   *(Opcional: edita `.env.local` para colocar tu propio token público `pk...` de Mapbox en `NEXT_PUBLIC_MAPBOX_TOKEN`).*
 
-3. Construye y levanta el contenedor en segundo plano:
+3. Construye y levanta el contenedor en segundo plano (asegúrate de tener **Docker Desktop** abierto):
    ```bash
    docker compose up -d --build
    ```
@@ -57,11 +63,28 @@ Plataforma de inteligencia geoespacial, monitoreo meteorológico y videovigilanc
    http://localhost:3000
    ```
 
+5. Comandos útiles de administración del contenedor:
+   ```bash
+   # Ver logs en tiempo real
+   docker compose logs -f
+
+   # Detener el contenedor
+   docker compose stop
+
+   # Volver a iniciar el contenedor
+   docker compose start
+   ```
+
 ---
 
-## 💻 Ejecución en Modo Desarrollo (Node.js)
+## 💻 Ejecución Local sin Docker (Modo Desarrollo con Node.js 20+)
 
 ```bash
+git clone https://github.com/jmvenerosod/ojo-de-dios-mexico.git
+cd ojo-de-dios-mexico
+cp .env.example .env.local
 npm install
 npm run dev
 ```
+
+Luego abre `http://localhost:3000` en tu navegador.
